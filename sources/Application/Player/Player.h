@@ -116,7 +116,8 @@ public:
   // Direct note playback methods for MIDI
   void PlayNote(unsigned short instrumentIndex, unsigned short channel,
                 unsigned char note, unsigned char velocity);
-  void StopNote(unsigned short instrumentIndex, unsigned short channel);
+  void StopNote(unsigned short instrumentIndex, unsigned short channel,
+                unsigned char note);
 
 protected:
   void updateSongPos(int position, int channel, int chainPos = 0, int hop = -1);

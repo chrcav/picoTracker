@@ -26,7 +26,7 @@ MidiInDevice::MidiInDevice(const char *name)
   isRunning_ = false;
 };
 
-MidiInDevice::~MidiInDevice(){};
+MidiInDevice::~MidiInDevice() {};
 
 bool MidiInDevice::Init() { return initDriver(); };
 
@@ -81,8 +81,8 @@ void MidiInDevice::onMidiTempoTick() {
   NotifyObservers();
 };
 
-void MidiInDevice::queueEvent(MidiEvent &event){
-    // TODO: queue the event
+void MidiInDevice::queueEvent(MidiEvent &event) {
+  // TODO: queue the event
 };
 
 void MidiInDevice::onDriverMessage(MidiMessage &message) {
@@ -146,7 +146,7 @@ void MidiInDevice::treatChannelEvent(MidiMessage &event) {
       int instrumentIndex = channelToInstrument_[midiChannel];
       Player *player = Player::GetInstance();
       if (player) {
-        player->StopNote(instrumentIndex, midiChannel);
+        player->StopNote(instrumentIndex, midiChannel, note);
       }
     }
   } break;
@@ -162,7 +162,7 @@ void MidiInDevice::treatChannelEvent(MidiMessage &event) {
       if (player) {
         // If velocity is 0, it's actually a note off in MIDI
         if (value == 0) {
-          player->StopNote(instrumentIndex, midiChannel);
+          player->StopNote(instrumentIndex, midiChannel, note);
         } else {
           player->PlayNote(instrumentIndex, midiChannel, note, value);
         }

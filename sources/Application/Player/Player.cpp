@@ -1222,8 +1222,11 @@ void Player::PlayNote(unsigned short instrumentIndex, unsigned short channel,
   }
 }
 
-void Player::StopNote(unsigned short instrumentIndex, unsigned short channel) {
+void Player::StopNote(unsigned short instrumentIndex, unsigned short channel,
+                      unsigned char note) {
   // Use the channel modulo SONG_CHANNEL_COUNT to ensure it's within range
   int playerChannel = channel % SONG_CHANNEL_COUNT;
-  mixer_.StopInstrument(playerChannel);
+  if (note == mixer_.GetChannelNote(playerChannel)) {
+    mixer_.StopInstrument(playerChannel);
+  }
 }
