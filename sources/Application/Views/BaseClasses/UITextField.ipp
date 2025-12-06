@@ -62,6 +62,14 @@ void UITextField<MaxLength>::Draw(GUIWindow &w, int offset) {
   }
 };
 
+template <uint8_t MaxLength> void UITextField<MaxLength>::ProcessClear() {
+  src_->Reset();
+
+  SetChanged();
+  NotifyObservers(
+      reinterpret_cast<I_ObservableData *>(static_cast<uintptr_t>(fourcc_)));
+};
+
 template <uint8_t MaxLength> void UITextField<MaxLength>::OnClick() {
   SetChanged();
   NotifyObservers(
